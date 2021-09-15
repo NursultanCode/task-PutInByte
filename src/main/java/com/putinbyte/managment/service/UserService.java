@@ -1,10 +1,27 @@
 package com.putinbyte.managment.service;
 
+import com.putinbyte.managment.model.User;
 import com.putinbyte.managment.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder bCryptPasswordEncoder;
 
+    public User findUserByEmail(String email){
+        return userRepository.findByEmail(email);
+    };
+
+    public void saveUser(User user) {
+        if (user.getId() == null) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setActive(Boolean.TRUE);
+        }
+        userRepository.save(user);
+    }
 }
