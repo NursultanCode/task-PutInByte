@@ -15,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -103,12 +104,17 @@ public class UserController {
         if (result.hasErrors()){
             return "updateFormAdmin";
         }else {
+            try {
+                userService.saveUser(user);
+            }catch (Exception e){
+                ObjectError error = new ObjectError("email","An account already exists for this email.");
+                result.addError(error);
+            }
             Collection<SimpleGrantedAuthority> nowAuthorities =(Collection<SimpleGrantedAuthority>)SecurityContextHolder
                     .getContext().getAuthentication().getAuthorities();
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(user.getEmail(), user.getPassword(), nowAuthorities);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             user.setActive(true);
-            userService.saveUser(user);
             return "redirect:/";
         }
     }

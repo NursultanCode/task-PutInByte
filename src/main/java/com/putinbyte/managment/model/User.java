@@ -29,6 +29,7 @@ public class User{
 
     @NotBlank
     @Email
+    @Column(unique = true)
     private String email;
     @Size(min = 4)
     @NotBlank

@@ -3,7 +3,7 @@
 
 <body>
 
-<h2>Owner</h2>
+<h2>Update user</h2>
 <form th:object="${user}" class="form-horizontal" method="post" th:action="@{/edit}">
     <div class="form-group has-feedback">
         <input type="hidden" th:field="${user.id}">
@@ -16,7 +16,8 @@
 
         <input
                 th:replace="~{fragments/inputField :: input ('Birth date', 'birthDate', 'date')}" />
-        <div class="form-group">
+        <label class="col-sm-2 control-label" >Role of user</label>
+        <div class="form-group col-sm-10">
             <select id="criteriaId" th:field="*{roleName}" name="roleName" class="custom-select form-control" required>
                 <option th:selected="${user.roleName}==USER" value="USER">User</option>
                 <option th:selected="${user.roleName}==ADMIN" value="ADMIN">Admin</option>
@@ -28,7 +29,7 @@
         <div class="col-sm-offset-2 col-sm-10">
             <button
                     th:with="text=${user.id==null}? 'Add user' : 'Update user'"
-                    class="btn btn-default" type="submit" th:text="${text}">Add
+                    class="btn btn-warning" type="submit" th:text="${text}">Add
                 User</button>
         </div>
     </div>
