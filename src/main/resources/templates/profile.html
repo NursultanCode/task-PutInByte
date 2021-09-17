@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body})}">
+
+<body>
+
+
+<h2>My Information</h2>
+
+
+<table class="table table-striped" th:object="${user}">
+    <tr>
+        <th>Name</th>
+        <td><b th:text="*{name}"></b></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td th:text="*{email}" /></td>
+    </tr>
+    <tr>
+        <th>Birth date</th>
+        <td th:text="*{birthDate}" /></td>
+    </tr>
+    <tr>
+        <th>Role</th>
+        <td th:text="*{roleName}" /></td>
+    </tr>
+    <td>
+    <td><a href="" th:href="@{/edit}" class="btn btn-warning">Edit</a></td>
+    </td>
+</table>

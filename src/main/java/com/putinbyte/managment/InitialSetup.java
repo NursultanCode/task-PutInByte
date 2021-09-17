@@ -39,6 +39,14 @@ import javax.annotation.PostConstruct;
                 user.setActive(Boolean.TRUE);
                 user.setRoleName(RoleNames.ADMIN.name());
                 userService.saveUser(user);
+
+                User user2 = new User();
+                user2.setName("Almaz");
+                user2.setEmail("almaz@test.test");
+                user2.setPassword("12345");
+                user2.setRoleName(RoleNames.USER.name());
+                user2.setActive(Boolean.TRUE);
+                userService.saveUser(user2);
             }
         }
 

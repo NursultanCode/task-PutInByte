@@ -1,0 +1,37 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{fragments/layout :: layout (~{::body})}">
+
+<body>
+
+<h2>Owner</h2>
+<form th:object="${user}" class="form-horizontal" method="post" th:action="@{/admin/user/update/{id}(id=${user.id})}">
+    <div class="form-group has-feedback">
+        <input type="hidden" th:value="${user.id}">
+        <input type="hidden" th:field="${user.password}">
+        <input
+                th:replace="~{fragments/inputField :: input ('Name', 'name', 'text')}" />
+        <input
+                th:replace="~{fragments/inputField :: input ('Email', 'email', 'text')}" />
+
+
+        <input
+                th:replace="~{fragments/inputField :: input ('Birth date', 'birthDate', 'date')}" />
+        <div class="form-group">
+            <select id="criteriaId" th:field="*{roleName}" name="roleName" class="custom-select form-control" required>
+                <option th:selected="${user.roleName}==USER" value="USER">User</option>
+                <option th:selected="${user.roleName}==ADMIN" value="ADMIN">Admin</option>
+            </select>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button
+                    th:with="text=${user.id==null}? 'Add user' : 'Update user'"
+                    class="btn btn-default" type="submit" th:text="${text}">Add
+                User</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>
