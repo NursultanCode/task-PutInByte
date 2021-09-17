@@ -73,16 +73,16 @@ public class UserController {
         return "updateFormAdmin";
     }
 
-    @GetMapping("changePassword")
+    @GetMapping("newPass")
     public String changePasswrod(Model model){
         model.addAttribute("newPasswordDto",new NewPasswordDto());
-        return "changePassword";
+        return "passForm";
     }
 
-    @PostMapping("changePassword")
+    @PostMapping("newPass")
     public String changePasswordProcess(@Valid NewPasswordDto passwordDto,BindingResult result){
         if (result.hasErrors()){
-            return "changePassword";
+            return "passForm";
         }
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());

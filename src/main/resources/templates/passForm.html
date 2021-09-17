@@ -4,7 +4,7 @@
 <body>
 
 <h2>Change password</h2>
-<form th:object="${newPasswordDto}" class="form-horizontal" method="post" th:action="@{/changePassword}">
+<form th:object="${newPasswordDto}" class="form-horizontal" method="post" th:action="@{/newPass}">
     <div class="form-group has-feedback">
         <input
                 th:replace="~{fragments/inputField :: input ('Password', 'password', 'text')}" />
